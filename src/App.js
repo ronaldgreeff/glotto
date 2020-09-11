@@ -1,26 +1,22 @@
 import React from 'react';
 import 'fontsource-roboto';
-import './App.css';
-import Button from '@material-ui/core/Button';
+import AppBar from './AppBar';
+import NumbersGrid from './NumbersGrid'
+import Container from '@material-ui/core/Container';
+import { spacing } from '@material-ui/system';
+import Box from '@material-ui/core/Box';
 
-
-function Square(props) {
-  return (
-    <Button className="square">
-      {props.value}
-    </Button>
-    );
-}
-
-function Row(props) {
-  return (
-    null
-    );
-}
 
 function App() {
   return (
-    <Square value="dick" />
+    <div className="App">
+      <AppBar />
+      <Box pt={2}>
+        <Container >
+          <NumbersGrid />
+        </Container>
+      </Box>
+    </div>
   );
 }
 
