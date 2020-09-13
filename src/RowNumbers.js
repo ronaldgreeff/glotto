@@ -12,19 +12,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RowInfo() {
+export default function SingleNumber() {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item>
+    <Grid container>
+      <Grid item>
+        <Paper className={classes.paper}>
           7
-        </Grid>
-        <Grid item>
-          7
-        </Grid>
+        </Paper>
       </Grid>
-    </Paper>
+      <Grid item>
+        <Paper className={classes.paper}>
+          7
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }

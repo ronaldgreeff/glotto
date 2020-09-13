@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import SingleNumber from './SingleNumber';
+import RowNumbers from './RowNumbers';
 import RowInfo from './RowInfo';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  gridItem: {
+    paddingLeft: theme.spacing(2),
+  }
 }));
 
 export default function NumbersRow() {
@@ -20,19 +23,12 @@ export default function NumbersRow() {
   return (
     <Paper className={classes.paper}>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item>
           <RowInfo />
         </Grid>
-        <Grid item xs={1}>
-          <SingleNumber />
+        <Grid item className={classes.gridItem}>
+          <RowNumbers />
         </Grid>
-        <Grid item xs={1}>
-          <SingleNumber />
-        </Grid>
-          <SingleNumber />
-          <SingleNumber />
-          <SingleNumber />
-          <SingleNumber />
       </Grid>
     </Paper>
   );
