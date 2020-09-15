@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const ticketData = { x: 7, y: 7, n: [1,2,3,4,5,6,7]}
+
 export default function NumbersRow() {
   const classes = useStyles();
 

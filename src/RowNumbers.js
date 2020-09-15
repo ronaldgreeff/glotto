@@ -4,29 +4,43 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   paper: {
+//     padding: theme.spacing(2),
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary,
+//   },
+// }));
 
-export default function SingleNumber() {
-  const classes = useStyles();
+class RowNumbers extends React.Component {
 
-  return (
-    <Grid container>
-      <Grid item>
-        <Paper className={classes.paper}>
-          7
-        </Paper>
+  constructor(props) {
+    super(props);
+    this.state = {
+      tempNumbers: [1,2,3,4,9,6,7],
+    };
+  }
+
+  render() {
+
+    const tempNumbers = this.state.tempNumbers;
+    var numberCards = []
+    for (var v of tempNumbers) {
+      numberCards.push(
+        <Grid item>
+          <Paper>
+            {v}
+          </Paper>
+        </Grid>
+      );
+    };
+
+    return (
+      <Grid container>
+        {numberCards}
       </Grid>
-      <Grid item>
-        <Paper className={classes.paper}>
-          7
-        </Paper>
-      </Grid>
-    </Grid>
-  );
+    );
+  };
 }
+
+export default RowNumbers;

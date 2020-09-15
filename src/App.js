@@ -6,6 +6,14 @@ import Container from '@material-ui/core/Container';
 import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 
+function TempButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Generate
+    </button>
+  );
+}
+
 class App extends React.Component {
 
   constructor(props) {
@@ -16,7 +24,7 @@ class App extends React.Component {
         y: 7,
         n: [1,2,3,4,5,6,7]
       }]
-    }
+    };
   }
 
   render() {
@@ -27,6 +35,9 @@ class App extends React.Component {
           <Container >
             <TicketGrid />
           </Container>
+        </Box>
+        <Box>
+          <TempButton />
         </Box>
       </div>
     );
