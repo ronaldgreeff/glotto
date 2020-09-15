@@ -13,23 +13,23 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   gridItem: {
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(5),
   }
 }));
 
-const ticketData = { x: 7, y: 7, n: [1,2,3,4,5,6,7]}
 
-export default function NumbersRow() {
+export default function NumbersRow(props) {
   const classes = useStyles();
+  const { x, y, n } = props.ticket;
 
   return (
     <Paper className={classes.paper}>
       <Grid container>
         <Grid item>
-          <RowInfo />
+          <RowInfo x={x} y={y} />
         </Grid>
         <Grid item className={classes.gridItem}>
-          <RowNumbers />
+          <RowNumbers numbers={n} />
         </Grid>
       </Grid>
     </Paper>

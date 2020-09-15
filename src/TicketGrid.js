@@ -10,19 +10,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NumbersGrid() {
-  const classes = useStyles();
+class NumbersGrid extends React.Component {
 
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
+  handleRow(tickets) {
+    var ticketRows = [];
+    for (var ticket of tickets) {
+      ticketRows.push(
         <Grid item xs={12}>
-          <TicketRow />
+          <TicketRow ticket={ticket}/>
         </Grid>
-        <Grid item xs={12}>
-          <TicketRow />
+      );
+    }
+    return ticketRows;
+  };
+
+  render() {
+    return (
+      <div>
+        <Grid container spacing={2}>
+          {this.handleRow(this.props.tickets)}
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
+
+export default NumbersGrid;
+
+// export default function NumbersGrid(props) {
+//   const classes = useStyles();
+//
+//   return (
+//     <div className={classes.root}>
+//       {props.tickets[0]['n']}
+//       <Grid container spacing={2}>
+//         <Grid item xs={12}>
+//           <TicketRow />
+//         </Grid>
+//         <Grid item xs={12}>
+//           <TicketRow />
+//         </Grid>
+//       </Grid>
+//     </div>
+//   );
+// }

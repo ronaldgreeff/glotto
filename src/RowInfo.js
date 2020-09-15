@@ -12,17 +12,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RowInfo() {
+export default function RowInfo(props) {
   const classes = useStyles();
 
   return (
     <Paper className={classes.paper}>
       <Grid container>
         <Grid item>
-          7
+          {props.x}
         </Grid>
         <Grid item>
-          7
+          {props.y}
         </Grid>
       </Grid>
     </Paper>
