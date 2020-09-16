@@ -6,25 +6,23 @@ import Container from '@material-ui/core/Container';
 import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 
-
 function TempButton(props) {
   // use this to setState of App,
   // simulating API call to retrieve user's tickets
   return (
     <button onClick={props.onClick}>
-      restGetTickets
+      {props.words}
     </button>
   );
 }
-
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      ticketData: [
-      ]
+      ticketData: [],
+      lottoData: [],
     };
   }
 
@@ -46,8 +44,8 @@ class App extends React.Component {
     return result.toFixed();
   }
 
-  restGetTickets(data) {
-    var ticketData = [
+  restGetTickets() {
+    const ticketData = [
       { x: 1, y: 2, n: [1,] },
       { x: 7, y: 49, n: [8,12,3,30,6,40,32] },
       { x: 5, y: 69, n: [26,47,15,59,65] },
@@ -61,6 +59,33 @@ class App extends React.Component {
     });
   }
 
+  getLottoResults() {
+    const lottoData = [
+      { x: 1, y: 2, n: [1,] },
+      { x: 7, y: 49, n: [8,12,3,30,6,40,32] },
+      { x: 5, y: 69, n: [26,47,15,59,65] },
+    ]
+    this.setState({
+      lottoData: lottoData,
+    })
+  }
+
+  checkTickets() {
+    this.getLottoResults();
+
+    const lottoData = this.state.lottoData;
+    const ticketData = this.state.ticketData;
+
+    for (var ld of lottoData) {
+      for (var td of ticketData) {
+        if (ld.x === td.x && ld.y === td.y) {
+          console.log(ld, td)
+        }
+      }
+    }
+
+  }
+
   render() {
 
     return (
@@ -72,7 +97,8 @@ class App extends React.Component {
           </Container>
         </Box>
         <Box>
-          <TempButton onClick={(data) => this.restGetTickets(data)} />
+          <TempButton words={'getTickets'} onClick={() => this.restGetTickets()} />
+          <TempButton words={'checkTickets'} onClick={() => this.checkTickets()} />
         </Box>
       </div>
     );

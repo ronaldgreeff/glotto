@@ -31,29 +31,3 @@ export default function TicketGrid(props) {
     </div>
   );
 }
-
-// Don't need a class actually
-// class TicketGrid extends React.Component {
-//
-//   handleRow(tickets) {
-//     //                                      todo: map key to id, not index.
-//     const ticketRows = tickets.map((ticket, index) =>
-//       <Grid item key={index} xs={12}>
-//         <TicketRow ticket={ticket}/>
-//       </Grid>
-//   );
-//     return ticketRows;
-//   };
-//
-//   render() {
-//     return (
-//       <div>
-//         <Grid container spacing={2}>
-//           {this.handleRow(this.props.tickets)}
-//         </Grid>
-//       </div>
-//     );
-//   }
-// }
-//
-// export default TicketGrid;
