@@ -10,47 +10,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-class NumbersGrid extends React.Component {
+export default function TicketGrid(props) {
+  const classes = useStyles();
 
-  handleRow(tickets) {
-    var ticketRows = [];
-    for (var ticket of tickets) {
-      ticketRows.push(
-        <Grid item xs={12}>
-          <TicketRow ticket={ticket}/>
-        </Grid>
-      );
-    }
+  function handleRow(tickets) {
+    //                                      todo: map key to id, not index.
+    const ticketRows = tickets.map((ticket, index) =>
+      <Grid item key={index} xs={12}>
+        <TicketRow ticket={ticket}/>
+      </Grid>
+    );
     return ticketRows;
   };
 
-  render() {
-    return (
-      <div>
-        <Grid container spacing={2}>
-          {this.handleRow(this.props.tickets)}
-        </Grid>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Grid container spacing={2}>
+        { handleRow(props.tickets) }
+      </Grid>
+    </div>
+  );
 }
 
-export default NumbersGrid;
-
-// export default function NumbersGrid(props) {
-//   const classes = useStyles();
+// Don't need a class actually
+// class TicketGrid extends React.Component {
 //
-//   return (
-//     <div className={classes.root}>
-//       {props.tickets[0]['n']}
-//       <Grid container spacing={2}>
-//         <Grid item xs={12}>
-//           <TicketRow />
-//         </Grid>
-//         <Grid item xs={12}>
-//           <TicketRow />
-//         </Grid>
+//   handleRow(tickets) {
+//     //                                      todo: map key to id, not index.
+//     const ticketRows = tickets.map((ticket, index) =>
+//       <Grid item key={index} xs={12}>
+//         <TicketRow ticket={ticket}/>
 //       </Grid>
-//     </div>
 //   );
+//     return ticketRows;
+//   };
+//
+//   render() {
+//     return (
+//       <div>
+//         <Grid container spacing={2}>
+//           {this.handleRow(this.props.tickets)}
+//         </Grid>
+//       </div>
+//     );
+//   }
 // }
+//
+// export default TicketGrid;

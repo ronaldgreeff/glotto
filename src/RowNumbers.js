@@ -9,22 +9,21 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    // backgroundColor: 'green',
   },
 }));
 
 export default function RowNumbers(props) {
+  // https://material-ui.com/styles/basics/#adapting-based-on-props
   const classes = useStyles();
 
-  var numberCards = []
-    for (var v of props.numbers) {
-      numberCards.push(
-        <Grid item>
-          <Paper className={classes.paper}>
-            {v}
-          </Paper>
-        </Grid>
-      );
-    };
+  const numberCards = props.numbers.map((val, index) =>
+    <Grid item key={index}>
+      <Paper className={classes.paper}>
+        {val}
+      </Paper>
+    </Grid>
+  );
 
   return (
     <Grid container>

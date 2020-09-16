@@ -21,6 +21,7 @@ export default function RowInfo(props) {
         <Grid item>
           {props.x}
         </Grid>
+        x
         <Grid item>
           {props.y}
         </Grid>
