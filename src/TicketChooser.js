@@ -33,7 +33,7 @@ export default function TicketChooser(props) {
 
   const totalBlocks = yBlocks*xBlocks;
   const volToOccupy = yBlockSpace*xBlockSpace;
-  const squareDims = ((totalBlocks/volToOccupy)/2);
+  const squareDims = ((volToOccupy/totalBlocks)/2);
 
   // const blockHeight = (yBlockSpace/yBlocks)/2;
   // const blockWidth = (xBlockSpace/xBlocks)/2;
@@ -44,12 +44,13 @@ export default function TicketChooser(props) {
     setxBlockSpace(ref.current.offsetHeight);
   }, [ref.current]);
   // console.log('width', ref.current ? ref.current.offsetWidth: 0);
+  // console.log('height', ref.current ? ref.current.offsetHeight: 0);
 
   const nBlocks = [];
   for (var i in Array.from(Array(totalBlocks))) {
     nBlocks.push(
       <Grid item key={i} >
-        <Box width={squareDims} height={squareDims}>
+        <Box m={2} width={10} height={10}>
           {i}
         </Box>
       </Grid>
@@ -59,7 +60,13 @@ export default function TicketChooser(props) {
   return (
     <Container className={classes.root}>
       <Container>
-        {squareDims}
+        {ref.current ? ref.current.offsetWidth: 0}
+        {' '}
+        {ref.current ? ref.current.offsetHeight: 0}
+        {' '}
+        // constantly changing height? container is growing...
+        // "blocks" container should be 90vh * 90vw, so calc that and -margin
+        {ref.current ? console.log(ref.current): 0}
       </Container>
       <Grid container>
         <Grid item xs={1}>
