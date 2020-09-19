@@ -13,15 +13,22 @@ const useStyles = makeStyles((theme) => ({
     bottom: 10,
     left: 0,
   },
-  blocks: {
+  blockArea: {
     height: "90vh",
     width: "90vw",
+    justify: "space-around",
+    alignItems:"center",
+    direction: "row-reverse",
     backgroundColor: "rgb(179, 218, 227)",
   },
   gridItem: {
-    maxHeight: "100%",
-    maxWidth: "100%",
-  }
+    outline: "1px dotted rgb(89, 170, 189)",
+  },
+  ticketValueBox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent:"center",
+  },
 }));
 
 export default function TicketChooser(props) {
@@ -31,16 +38,18 @@ export default function TicketChooser(props) {
   const yMax = 49;
   const min = 1;
 
+  // slider values
   const [yValue, setyValue] = useState(min);
   const [xValue, setxValue] = useState(min);
+  // available space
   const [yHeight, setyHeight ] = useState(min);
   const [xWidth, setxWidth ] = useState(min);
 
   const totalBlocks = xValue*yValue;
-
   const marginSpace = 1.4;
-  const boxHeight = yHeight/yValue;
-  const boxWidth = xWidth/xValue;
+
+  const boxHeight = (yHeight/yValue)-.1;
+  const boxWidth = (xWidth/xValue)-.1;
 
   const ref = useRef(null);
   useEffect(() => {
@@ -52,8 +61,10 @@ export default function TicketChooser(props) {
   for (var i in Array.from(Array(totalBlocks))) {
     nBlocks.push(
       <Grid item key={i} className={classes.gridItem}>
-        <Box width={boxWidth} height={boxHeight}>
-          {i}
+        <Box className={classes.ticketValueBox} width={boxWidth} height={boxHeight}>
+          <Typography className={classes.ticketValue}>
+            {parseInt(i)+1}
+          </Typography>
         </Box>
       </Grid>
     );
@@ -63,8 +74,10 @@ export default function TicketChooser(props) {
     <Container className={classes.root}>
       <Container>
         totalBlocks: {totalBlocks},
-        y: {boxHeight},
-        x: {boxWidth},
+        yHeight: {yHeight} / {yValue},
+        xWidth: {xWidth} / {xValue},
+        boxH: {boxHeight},
+        boxW: {boxWidth},
       </Container>
       <Grid container>
         <Grid item xs={1}>
@@ -83,7 +96,7 @@ export default function TicketChooser(props) {
           />
         </Grid>
 
-        <Grid item xs={11} className={classes.blocks} ref={ref}>
+        <Grid item xs={11} className={classes.blockArea} ref={ref}>
           <Grid container>
             {nBlocks}
           </Grid>
