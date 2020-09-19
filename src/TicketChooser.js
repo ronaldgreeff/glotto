@@ -14,9 +14,14 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
   },
   blocks: {
-    height: '90vh',
-    width: '90vw',
+    height: "90vh",
+    width: "90vw",
+    backgroundColor: "rgb(179, 218, 227)",
   },
+  gridItem: {
+    maxHeight: "100%",
+    maxWidth: "100%",
+  }
 }));
 
 export default function TicketChooser(props) {
@@ -26,31 +31,28 @@ export default function TicketChooser(props) {
   const yMax = 49;
   const min = 1;
 
-  const [yBlocks, setyBlocks] = useState(min);
-  const [xBlocks, setxBlocks] = useState(min);
-  const [yBlockSpace, setyBlockSpace ] = useState(min);
-  const [xBlockSpace, setxBlockSpace ] = useState(min);
+  const [yValue, setyValue] = useState(min);
+  const [xValue, setxValue] = useState(min);
+  const [yHeight, setyHeight ] = useState(min);
+  const [xWidth, setxWidth ] = useState(min);
 
-  const totalBlocks = yBlocks*xBlocks;
-  const volToOccupy = yBlockSpace*xBlockSpace;
-  const squareDims = ((volToOccupy/totalBlocks)/2);
+  const totalBlocks = xValue*yValue;
 
-  // const blockHeight = (yBlockSpace/yBlocks)/2;
-  // const blockWidth = (xBlockSpace/xBlocks)/2;
+  const marginSpace = 1.4;
+  const boxHeight = yHeight/yValue;
+  const boxWidth = xWidth/xValue;
 
   const ref = useRef(null);
   useEffect(() => {
-    setyBlockSpace(ref.current.offsetWidth);
-    setxBlockSpace(ref.current.offsetHeight);
+    setxWidth(ref.current.offsetWidth);
+    setyHeight(ref.current.offsetHeight);
   }, [ref.current]);
-  // console.log('width', ref.current ? ref.current.offsetWidth: 0);
-  // console.log('height', ref.current ? ref.current.offsetHeight: 0);
 
   const nBlocks = [];
   for (var i in Array.from(Array(totalBlocks))) {
     nBlocks.push(
-      <Grid item key={i} >
-        <Box m={2} width={10} height={10}>
+      <Grid item key={i} className={classes.gridItem}>
+        <Box width={boxWidth} height={boxHeight}>
           {i}
         </Box>
       </Grid>
@@ -60,19 +62,16 @@ export default function TicketChooser(props) {
   return (
     <Container className={classes.root}>
       <Container>
-        {ref.current ? ref.current.offsetWidth: 0}
-        {' '}
-        {ref.current ? ref.current.offsetHeight: 0}
-        {' '}
-        // constantly changing height? container is growing...
-        // "blocks" container should be 90vh * 90vw, so calc that and -margin
-        {ref.current ? console.log(ref.current): 0}
+        totalBlocks: {totalBlocks},
+        y: {boxHeight},
+        x: {boxWidth},
       </Container>
       <Grid container>
         <Grid item xs={1}>
           <Typography id="slider" gutterBottom>
           </Typography>
           <Slider
+            orientation="vertical"
             ariaLabelledby="slider"
             valueLabelDisplay="auto"
             defaultValue={min}
@@ -80,13 +79,12 @@ export default function TicketChooser(props) {
             min={min}
             max={yMax}
             marks
-            orientation="vertical"
-            onChange={(event, value) => setxBlocks(value)}
+            onChange={(event, value) => setyValue(value)}
           />
         </Grid>
 
-        <Grid item xs={11} className={classes.blocks}>
-          <Grid container ref={ref}>
+        <Grid item xs={11} className={classes.blocks} ref={ref}>
+          <Grid container>
             {nBlocks}
           </Grid>
         </Grid>
@@ -104,7 +102,7 @@ export default function TicketChooser(props) {
             min={min}
             max={xMax}
             marks
-            onChange={(event, value) => setyBlocks(value)}
+            onChange={(event, value) => setxValue(value)}
           />
         </Grid>
       </Grid>
